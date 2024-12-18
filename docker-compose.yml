@@ -1,0 +1,41 @@
+services:
+  tdarr:
+    container_name: tdarr
+    image: haveagitgat/tdarr:latest 
+    #deploy:
+      #resources:
+        #reservations:
+          #devices:
+            #- capabilities: [gpu]
+    restart: unless-stopped
+    #network_mode: bridge
+    #ports:
+      #- 8265:8265 # webUI port
+      #- 8266:8266 # server port
+    environment:
+      - TZ=America/Chicago
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=002
+      - serverIP=127.0.0.1
+      - serverPort=8266
+      - webUIPort=8265
+      - internalNode=true
+      - inContainer=true
+      - nodeName=MyInternalNode
+        #- NVIDIA_DRIVER_CAPABILITIES=all
+        #- NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./server:/app/server
+      - ./configs:/app/configs
+      - ./logs:/app/logs
+      - /mnt/RAID/public/Videos:/media
+      - /mnt/RAID/tyler/videos/MakeMKV/tdarr:/temp
+    devices:
+      - /dev/dri:/dev/dri
+networks:
+  default:
+    name: tdarr
+    external: true
+
+
