@@ -29,7 +29,7 @@ services:
       - ./server:/app/server
       - ./configs:/app/configs
       - ./logs:/app/logs
-      - /mnt/RAID/public/Videos:/media
+      - /mnt/public/Videos:/media
       - /mnt/RAID/tyler/videos/MakeMKV/tdarr:/temp
     devices:
       - /dev/dri:/dev/dri
