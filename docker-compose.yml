@@ -2,11 +2,11 @@ services:
   tdarr:
     container_name: tdarr
     image: haveagitgat/tdarr:latest 
-    #deploy:
+      #deploy:
       #resources:
-        #reservations:
-          #devices:
-            #- capabilities: [gpu]
+      #reservations:
+      #devices:
+      #- capabilities: [gpu]
     restart: unless-stopped
     #network_mode: bridge
     #ports:
@@ -25,6 +25,8 @@ services:
       - nodeName=MyInternalNode
         #- NVIDIA_DRIVER_CAPABILITIES=all
         #- NVIDIA_VISIBLE_DEVICES=all
+    group_add:
+      - "106"
     volumes:
       - ./server:/app/server
       - ./configs:/app/configs
